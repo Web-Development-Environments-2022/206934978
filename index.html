@@ -1,193 +1,942 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css" />
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta charset="utf-8">
+ <link rel="stylesheet" type="text/css" href="style.css" />
+ <style>
+  body {margin:0;}
+
+  .navbar {
+   overflow: hidden;
+   background-color: rosybrown;
+   position: fixed;
+   top: 0;
+   width: 100%;
+   z-index:1;
+  }
+
+  .navbar a {
+   float: left;
+   display: block;
+   color: #f2f2f2;
+   text-align: center;
+   padding: 8px 100px;
+   text-decoration: cornsilk;
+   font-size: 22px;
+   font-family: "Bookman Old Style";
+  }
+
+  .navbar a:hover {
+   background: #dddddd;
+   color: #333333;
+  }
+
+  .main {
+   padding: 16px;
+   margin-top: 30px;
+   height: 1500px; /* Used in this example to enable scrolling */
+  }
+ </style>
+ <style>
+  * {box-sizing: border-box;}
+
+  .container {
+   position: relative;
+   width: 50%;
+   max-width: 200px;
+  }
+
+  .image {
+   display: block;
+   width: 100%;
+  }
+
+  .overlay {
+   position: absolute;
+   bottom: 0;
+   background: rgb(0, 0, 0);
+   background: rgba(0, 0, 0, 0.5); /* Black see-through */
+   color: #f1f1f1;
+   width: 100%;
+   transition: .5s ease;
+   opacity:0;
+   color: white;
+   font-size: 20px;
+   padding: 20px;
+   text-align: center;
+  }
+
+  .container:hover .overlay {
+   opacity: 1;
+  }
+ </style>
+
+
+ <style>
+  body {
+   font-family: Arial;
+   margin: 0;
+  }
+
+  * {
+   box-sizing: border-box;
+  }
+
+  img {
+   vertical-align: middle;
+  }
+
+  /* Position the image container (needed to position the left and right arrows) */
+  .container2 {
+   position: relative;
+   width: 40%;
+  }
+
+  /* Hide the images by default */
+  .mySlides {
+   display: none;
+  }
+
+  /* Add a pointer when hovering over the thumbnail images */
+  .cursor {
+   cursor: pointer;
+  }
+
+  /* Next & previous buttons */
+  .prev,
+  .next {
+   cursor: pointer;
+   position: inherit;
+   top: 40%;
+   width: auto;
+   padding: 16px;
+   margin-top: -50px;
+   color: #222222;
+   font-size: 50px;
+   user-select: none;
+   -webkit-user-select: none;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+   right: 0;
+   border-radius: 6px 0 0 6px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover,
+  .next:hover {
+   background-color: hotpink;
+  }
+
+  /* Number text (1/3 etc) */
+  .numbertext {
+   color: #f2f2f2;
+   font-size: 12px;
+   padding: 8px 12px;
+   position: absolute;
+   top: 0;
+  }
+
+  /* Container for image text */
+  .caption-container {
+   text-align: center;
+   background-color: #222;
+   padding: 2px 16px;
+   color: white;
+  }
+
+  .row:after {
+   content: "";
+   display: table;
+   clear: both;
+  }
+
+  /* Six columns side by side */
+  .column {
+   float: left;
+   width: 16.66%;
+  }
+
+  /* Add a transparency effect for thumnbail images */
+  .demo {
+   opacity: 0.6;
+  }
+
+  .active,
+  .demo:hover {
+   opacity: 1;
+  }
+ </style>
+
+ <script src="https://cdn.tiny.cloud/1/egwrbl3kc59mi6dvuq2b7tvwqt7hh4mh7g3t8z2o28b4wiq1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+ <script>
+  tinymce.init({
+   selector: "#subject",
+   plugins: "emoticons",
+   toolbar: "emoticons",
+   toolbar_location: "bottom",
+   menubar: false
+  });
+ </script>
+
 </head>
+
+
 <body>
-<div id="menu">
-<li><a href="#about">About Me</a></li>
-<li><a href="#photos">My Photos</a></li>
-<li><a href="#playlist">My Playlist</a></li>
-<li><a href="#like">Like</a></li>
-<li><a href="#qrcoder">QR code</a></li>
-<li><a href="#spa">Q&A</a></li>
-<li><a href="#contact">Contact Me</a></li>
+
+<div class="navbar">
+ <a href="#about">About Me</a>
+ <a href="#photos">My Photos</a>
+ <a href="#playlist">My Playlist</a>
+ <a href="#like">Like</a>
+ <a href="#qrcoder">QR code</a>
+ <a href="#spa">Q&A</a>
+ <a href="#contact">Contact Me</a>
 </div>
-		  
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/he_IL/sdk.js#xfbml=1&version=v13.0" nonce="ukMx5jzC"></script>
+
 <section id="about" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-about me
-<br/>
-<br/>
-<br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <h1>About Me</h1>
+ <br/>
+
+<center>
+ <form id="#form">
+  <label for="lang-switch">
+   <span lang="he"> בחר שפה</span>
+   <span lang="en">Choose Language </span>
+  </label>
+  <select id="lang-switch">
+   <option value="en">English</option>
+   <option value="he" selected>עברית</option>
+  </select>
+ </form>
+</center>
+
+ <center>
+ <p>
+  <span lang="he">
+   <br/>
+  שלום לכולם!
+  <br/>
+  <br/>
+  <br/>
+  שמי לאה קרפ. אני בת 86, גרה בחדרה.
+  <br/>
+  <br/>
+  <br/>
+  אני אשמח לשתף איתכם את סיפור החיים שלי!
+  <br/>
+  <br/>
+  נולדתי בשנת 1936, בעיירה הנקראת "טומשוב-לובלסקי" באזור לובלין, שבפולין.
+  <br/>
+   להורים שלי קראו שרה ויוסף ז"ל. אני האחות הבכורה ואחריי נולדו שלושה אחים: צבי-הירש, אשר לא שרד את הרעב במהלך מלחמת העולם השנייה, מלכה ואפרים.
+   <br/>
+  מלחמת העולם השנייה פרצה כשהייתי בת 3 שנים בלבד. כאשר הצבא הגרמני פלש לפולין, והחיילים הגרמנים הגיעו לעיירה, המשפחה שלי החליטה לברוח מהבית ולחצות את הגבול עם ברית המועצות. המשפחה שלי הועברה על-ידי הרשויות לסיביר הקפואה. גרנו בתנאים קשים של קור ורעב למשך רוב שנות המלחמה. כשהמלחמה הסתיימה, רצנו לאן שגרנו לפני המלחמה, אך התוודנו כי הבית בו גרנו נהרס.
+   <br/>
+  <br/>
+   עליתי לישראל בשנת 1949, חודשים ספורים לאחר שמלחמת העצמאות הסתיימה. הגעתי לישראל על-ידי מטוס מגרמניה בלי המשפחה שלי, עם קבוצה של בנות ובנים צעירים בני גילי בעזרת ארגון עליית הנוער של "הסוכנות היהודית", לקיבוץ חניתה שבגבול ישראל-לבנון.
+   <br/>
+  כחודש לאחר מכן, ההורים והאחים שלי הגיעו לישראל לעיר חיפה. עזבתי את קיבוץ חניתה והצטרפת למשפחתי בחיפה.
+   <br/>
+  <br/>
+   הכרתי את שמעון, אשר היה בעל שם משפחה זהה לשלי. התחתנו ב- 18 בנובמבר 1953. אחרי שהתחתנתי הייתי עקרת בית - הייתי אחראית על הילדים שלי, תפרתי להם את כל הבגדים ובישלתי מאכלים.
+  <br/>
+  <br/>
+   יש לי שלושה ילדים אהובים: חנה שנולדה ב- 1955 (בת 67), חדווה שנולדה ב- 1958 (בת 64) וקובי שנולד ב- 1963 (בן 59).
+   <br/>
+  יש לי 10 נכדים: לחנה יש 3 ילדים, לחדווה 4 ילדים ולקובי 3.
+   <br/>
+ יש לי גם 11 נינים, וה- 12 עתיד להיוולד בעוד כחודש.
+  <br/>
+  <br/>
+  <br/>
+  איבדתי את בעלי שמעון היקר והאהוב ב- 5 ביוני 2016.
+   <br/>
+ הוא נפטר ממחלת הסרטן. הוא השאיר מאחור ילדים, נכדים ונינים אוהבים. החור בלב הוא גדול.
+  <br/>
+ שמעון היה בעל ואיש משפחה טוב ותומך, ואבא וסבא מוערץ.
+  <br/>
+ הוא דאג לכל אחד והיה שנון ומצחיק עד יומו האחרון.
+  <br/>
+  בשניים-שלושה חודשים של הדרדרות, הוא עזב אותנו בהפתעה.
+  <br/>
+  לשמעון היה תפקיד חשוב בהקמת המדינה, הוא שירת כלוחם בחטיבת גולני וקיבל צל"ש ב"מבצע קדש" מאלוף פיקום הדרום.
+   <a href="https://www.gvura.org/a344171-%D7%98%D7%95%D7%A8%D7%90%D7%99-%D7%A9%D7%9E%D7%A2%D7%95%D7%9F-%D7%A7%D7%A8%D7%A4">תוכלו לראות כאן</a>
+   <br/>
+  במהלך שנותיו המבוגרות, שמעון ניהל והוביל את התכנון והבנייה של התשתיות הראשיות במדינה, שדות תעופה ועוד.
+  <br/>
+  <br/>
+  <br/>
+   אני כעת גרה עם סייעת 24/7, אך אני אשמח ליצור קשרים ידידותיים חבריים במהלך תקופת הקורונה על-ידי פרופיל זה.
+  <br/>
+  תודה על קריאתכם. תהנו!
+  <br/>
+  <br/>
+
+</span>
+</p>
+</center>
+
+<center>
+<p>
+  <span lang="en">
+   <br/>
+  Hi everybody!
+  <br/>
+  <br/>
+  <br/>
+  My name is Leah Karp. I am 86 years old, living in Hadera.
+  <br/>
+  <br/>
+  <br/>
+  I would like to share with you my life story!
+  <br/>
+  <br/>
+  I was born in 1936, in a town called "Tomshov-Lovelski" at Lublin area, in Poland.
+  In this town more than half were Jewish.
+  <br/>
+  My parents were named Sarah and Joseph. I'm the oldest sister and I was followed by three brothers: Zvi-Hirsch who did not survive the famine during World War II, Malka and Ephraim.
+  <br/>
+  World War II broke out when I was only three years old. When the German army invaded Poland, and as the German soldiers approached the town, my family decided to run away from home and cross the border with the Soviet Union. My family was transferred by the authorities to snowy Siberia. We lived in harsh conditions of cold and famine for most of the war years. When the war ended, we ran to where we lived before the war, but it turned out that the house we lived in had been destroyed.
+  <br/>
+  <br/>
+  I immigrated to Israel in 1949, a few months after the War of Independence ended. I arrived in Israel on a plane from Germany without my family with a group of boys and girls my age with the help of the Youth Aliyah organization of the Jewish Agency to Kibbutz Hanita on the Israel-Lebanon border.
+  <br/>
+  About a month later, my parents and brothers came to Israel for the city of Haifa. I left Kibbutz Hanita and joined my family in Haifa.
+  <br/>
+  <br/>
+  I knew Simon, who was by a surname like mine. We got married on 18 November 1953. After I got married I was a housewife - I took care of my children and sewed all their clothes for them and cooked dishes.
+  <br/>
+  <br/>
+  I have three lovely children: Hannah was born in 1955 (67 years old), Hedva was born in 1958 (64 years old), and Kobe was born in 1963 (59 years old).
+  <br/>
+  I have 10 grandchildren: Hannah has 3 children, Hedva has 4 children, and Kobe has 3 children.
+  <br/>
+  I also have 11 great-grandchildren and the 12th is due to be born in about a month.
+  <br/>
+  <br/>
+  <br/>
+  I lost my dear and beloved husband Shimon on June 5, 2016.
+  <br/>
+  He died of cancer. He left behind children, grandchildren and loving great-grandchildren. The hole in the heart is big.
+  <br/>
+  Shimon was a good husband and supportive family man and a father and grandfather who they admired.
+  <br/>
+  He took care of everyone and was funny and witty until his last day.
+  <br/>
+  In two or three months of deterioration, he left us by surprise.
+  <br/>
+  Shimon played an important part in the establishment of the state, he served as a fighter in the Golani Brigade and received a commendation in "Mivtza Kadesh" by General Officer Commanding Southern Command. <a href="https://www.gvura.org/a344171-%D7%98%D7%95%D7%A8%D7%90%D7%99-%D7%A9%D7%9E%D7%A2%D7%95%D7%9F-%D7%A7%D7%A8%D7%A4">You can see it here.</a>
+  <br/>
+  During his adult years, Shimon managed and led the planning and construction of the country's main infrastructurs, airports, and etc.
+  <br/>
+  <br/>
+  <br/>
+  I now live with an assistant 24/7, but I would love to establish friendly relationships during the coronavirus by this profile.
+  <br/>
+  Thank you for reading. Enjoy!
+  <br/>
+  <br/>
+  </span>
+ </p>
+</center>
+
+ <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+ <script>
+  $('[lang]').hide(); // hide all lang attributes on start.
+  $('[lang="en"]').show(); // show just Korean text (you can change it)
+  $('#lang-switch').change(function () { // put onchange event when user select option from select
+   var lang = $(this).val(); // decide which language to display using switch case. The rest is obvious (i think)
+   switch (lang) {
+    case 'en':
+     $('[lang]').hide();
+     $('[lang="en"]').show();
+     break;
+    case 'he':
+     $('[lang]').hide();
+     $('[lang="he"]').show();
+     break;
+    default:
+     $('[lang]').hide();
+     $('[lang="he"]').show();
+   }
+  });
+ </script>
 </section>
 
 <section id="photos" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-my photos
-<br/>
-<br/>
-<br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <h1>My Photos</h1>
+ <br/>
+ <TABLE border=8 width=200px align="center">
+  <TR>
+   <TD>
+    <center>
+    עם שמעון בעלי ז"ל באירוע משפחתי
+    </center>
+   </TD>
+   <TD>
+    <center>
+     עם שמעון בעלי ז"ל כנערים
+    </center>
+   </TD>
+   <TD>
+    <center>
+     עם שמעון בעלי ז"ל כשרקנדו באירוע משפחתי
+    </center>
+   </TD>
+  </TR>
+  <TR>
+   <TD>
+    <div class="zoom">
+     <img src=casino.jpeg width=200 height=280 />
+    </div>
+   </TD>
+   <TD>
+    <div class="zoom">
+     <img src=grandpa_grandma_youngs.jpeg width=200 height=280 />
+    </div>
+   </TD>
+   <TD>
+    <div class="zoom">
+     <img src=grandpa_grandma_dancing.jpeg width=200 height=280 />
+    </div>
+   </TD>
+  </TR>
+  <TR>
+   <TD>
+    <center>
+     שמעון כלוחם
+     <br/>
+     קיבל
+     <a href="https://www.gvura.org/a344171-%D7%98%D7%95%D7%A8%D7%90%D7%99-%D7%A9%D7%9E%D7%A2%D7%95%D7%9F-%D7%A7%D7%A8%D7%A4" style="font-style: italic">צל"ש מאלוף פיקוד הדרום</a>
+    </center>
+   </TD>
+   <TD>
+    <center>
+     אני בצעירותי :) מוזמנים לפרגן
+    </center>
+   </TD>
+   <TD>
+    <center>
+     רוקדים גם כשמתבגרים יחד
+     <br/>
+     בחתונה של חדווי ושלמה
+    </center>
+   </TD>
+  </TR>
+  <TR>
+   <TD>
+    <div class="zoom">
+     <img src=grandpa_army.jpeg width=200 height=280 />
+    </div>
+   </TD>
+   <TD>
+    <div class="zoom">
+     <img src=me_young.jpeg width=200 height=280 />
+    </div>
+   </TD>
+   <TD>
+    <div class="zoom">
+     <img src=grandpa_grandma_dancing_olders.jpeg width=200 height=280 />
+    </div>
+   </TD>
+  </TR>
+ </TABLE>
+ <br/>
+ <br/>
+ <br/>
+
+ <center>
+ <h2>My Lovely Children</h2>
+ <p>Hover over the images to see my child's name and her/his husband/wife.</p>
+
+  <div class="container">
+   <img src="hana.jpeg" alt="Hannah" class="image">
+   <div class="overlay">Hannah & Nir</div>
+  </div>
+
+ <div class="container">
+  <img src="hedva.jpeg" alt="Hedva" class="image">
+  <div class="overlay">Hedva & Shlomo</div>
+ </div>
+
+  <div class="container">
+  <img src="kobe.jpeg" alt="Kobe" class="image">
+  <div class="overlay">Kobe & Riki</div>
+  </div>
+ </center>
+ <br/>
+
+
+<center>
+ <h2 style="text-align:center">A gallery of few of my grandchildren and my great-grandchildren</h2>
+
+ <div class="container2">
+  <div class="mySlides">
+   <div class="numbertext">1 / 12</div>
+   <img src="1brothers.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">2 / 12</div>
+   <img src="2assaf_shakedi.jpeg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">3 / 12</div>
+   <img src="3amiti.jpeg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">4 / 12</div>
+   <img src="4or_noga.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">5 / 12</div>
+   <img src="5sukot.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">6 / 12</div>
+   <img src="6omer.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">7 / 12</div>
+   <img src="8event.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">8 / 12</div>
+   <img src="9noga.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">9 / 12</div>
+   <img src="10idos_family.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">10 / 12</div>
+   <img src="11shakedi.jpeg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">11 / 12</div>
+   <img src="12idos_wedding.jpg" style="width:100%">
+  </div>
+
+  <div class="mySlides">
+   <div class="numbertext">12 / 12</div>
+   <img src="16finish_bahad1.jpg" style="width:100%">
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+
+<!--  <div class="caption-container">-->
+<!--   <p id="caption"></p>-->
+<!--  </div>-->
+
+  <div class="row">
+   <div class="column">
+    <img class="demo cursor" src="1brothers_square.jpg" style="width:100%" onclick="currentSlide(1)" alt="The Woods">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="2assaf_shakedi_square.jpeg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="3amiti_square.jpeg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="4or_noga_square.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="5sukot_square.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="6omer_square.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="8event_square.jpg" style="width:100%" onclick="currentSlide(7)" alt="Snowy Mountains">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="9noga_square.jpg" style="width:100%" onclick="currentSlide(8)" alt="Snowy Mountains">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="10idos_family_square.jpg" style="width:100%" onclick="currentSlide(9)" alt="Snowy Mountains">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="11shakedi_square.jpeg" style="width:100%" onclick="currentSlide(10)" alt="Snowy Mountains">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="12idos_wedding_square.jpg" style="width:100%" onclick="currentSlide(11)" alt="Snowy Mountains">
+   </div>
+   <div class="column">
+    <img class="demo cursor" src="16finish_bahad1_square.jpg" style="width:100%" onclick="currentSlide(12)" alt="Snowy Mountains">
+   </div>
+
+  </div>
+ </div>
+</center>
+
+ <script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+   showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+   showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+   let i;
+   let slides = document.getElementsByClassName("mySlides");
+   let dots = document.getElementsByClassName("demo");
+   let captionText = document.getElementById("caption");
+   if (n > slides.length) {slideIndex = 1}
+   if (n < 1) {slideIndex = slides.length}
+   for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+   }
+   for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+   }
+   slides[slideIndex-1].style.display = "block";
+   dots[slideIndex-1].className += " active";
+   captionText.innerHTML = dots[slideIndex-1].alt;
+  }
+ </script>
 </section>
 
 <section id="playlist" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-my playlist
-<br/>
-<br/>
-<br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <h1>My Playlist</h1>
+ <br/>
+ <center>
+  <h2>My lovely song is:</h2>
+  <br/>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/aaJbbzIR2xY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <br/>
+   <br/>
+   But if you want to hear more songs I like you can find here:
+   <br/>
+   <br/>
+   <iframe width="170" height="115" src="https://www.youtube.com/embed/4lRoyWot8L0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <iframe width="170" height="115" src="https://www.youtube.com/embed/V4QSoLFj-NM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <iframe width="170" height="115" src="https://www.youtube.com/embed/iHImFu4_diw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <iframe width="170" height="115" src="https://www.youtube.com/embed/ykekBqmGHrc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <br/>
+
+    <h2>Dropdown menu for listening to more that singers songs</h2>
+    <p>Click on the "Dropdown" link to see the dropdown menu.</p>
+
+    <script>
+     /* When the user clicks on the button,
+     toggle between hiding and showing the dropdown content */
+     function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+     }
+
+     // Close the dropdown if the user clicks outside of it
+     window.onclick = function(e) {
+      if (!e.target.matches('.dropbtn')) {
+       var myDropdown = document.getElementById("myDropdown");
+       if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+       }
+      }
+     }
+    </script>
+   <div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+    <div id="myDropdown" class="dropdown-content">
+     <a href="https://www.youtube.com/results?search_query=%D7%99%D7%92%D7%90%D7%9C+%D7%91%D7%A9%D7%9F">יגאל בשן</a>
+     <a href="https://www.youtube.com/results?search_query=%D7%99%D7%94%D7%95%D7%A8%D7%9D+%D7%92%D7%90%D7%95%D7%9F">יהורם גאון</a>
+     <a href="https://www.youtube.com/results?search_query=%D7%A9%D7%9C%D7%9E%D7%94+%D7%90%D7%A8%D7%A6%D7%99">שלמה ארצי</a>
+    </div>
+
+   </div>
+
+ </center>
+
+ <br/>
+ <br/>
+ <br/>
 </section>
 
 <section id="like" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-give me a like
-<br/>
-<br/>
-<br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <h1>Give Me A Like</h1>
+ <br/>
+ <center>
+  <div class="fb-like" data-href="http://localhost:63342/assignment1-NoaMagrisso/index.html?_ijt=fadfmg6o24oq1ubudr4qdpspld&amp;_ij_reload=RELOAD_ON_SAVE#contact" data-width="" data-layout="box_count" data-action="like" data-size="large" data-share="true"></div>
+ </center>
+ <br/>
 </section>
 
 <section id="qrcoder" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-scan my code
-<br/>
-<br/>
-<br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <h1>Scan My Code</h1>
+ <br/>
+ <center>
+  <img src=qrcode.JPG width=250 height=250 />
+ </center>
+ <br/>
 </section>
 
 <section id="spa" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-ans
-<br/>
-<br/>
-<br/>
-</section>
+ <br/>
+ <br/>
+ <h1>Ans</h1>
+ <br/>
+ <center>
+  <p>
+   <br/>
+  בסעיף זה אענה על השאלות שהתבקשנו במסגרת עבודה זו
+  <br/>
+   <br/>
+   1. להלן שלושה הבדלים עיקריים בין web1, web2, web3:
+   <br/>
+  <TABLE border=4 width=800px align="center">
+   <TR>
+    <TD>
+     <center>
+      web 3
+     </center>
+    </TD>
+    <TD>
+     <center>
+      web 2
+     </center>
+    </TD>
+    <TD>
+     <center>
+      web 1
+     </center>
+    </TD>
+    <TD>
+     <center>
 
+     </center>
+    </TD>
+   </TR>
+   <TR>
+    <TD>
+     <center>
+     קריאה, כתיבה ובעלות על קהילות ואתרים
+     </center>
+    </TD>
+    <TD>
+     <center>
+     קריאה, כתיבה ויצירת תוכן. לכן משתמשים הצטרפו לפלטפורמות חברתיות אשר הפכו לגדולות בגלל התוכן שנוצר
+     כלומר יש גם שימוש של תרומה, יצירת פרופיל באתר, השארת הערות וביקורות
+     </center>
+    </TD>
+    <TD>
+     <center>
+     קריאה וקבלת מידע
+     </center>
+    </TD>
+    <TD>
+     <center>
+     סוג שימוש
+     </center>
+    </TD>
+   </TR>
+  <TR>
+   <TD>
+    <center>
+    bbb
+    </center>
+   </TD>
+   <TD>
+    <center>
+    כמות גדולה של אנשים שמייצרים תוכן
+    כבר לא מדובר באתרים אישים ובלוגים
+    קהילות, שיתופי פעולה ומדיה חברתית
+    </center>
+   </TD>
+   <TD>
+    <center>
+    המספר מצומצם של אנשים כתבו תוכן ודפי אינטרנט עבור כמות גדולה של אנשים שהם צרכני אינטרנט
+    </center>
+   </TD>
+   <TD>
+    <center>
+    יוצרי התוכן
+    </center>
+   </TD>
+  </TR>
+  <TR>
+   <TD>
+    <center>
+    האינטרנט הזה כולל AI ו- ML שמעבדים תוכן כמו "מוח גלובלי" כאשר הנתונים מחוברים בצורה קונטקסטואלית ורעיונית
+    </center>
+   </TD>
+   <TD>
+    <center>
+    מערכות ניהול תוכן לקישורים המבוססים על "תיוג" של תוכן אתר באמצעות מילות מפתח
+    </center>
+   </TD>
+   <TD>
+    <center>
+    לא הייתה אפשרות לעבור מדף אחד לדף אחר לפי תוכן והקשר, אלא מדובר באינציקלופדיה דיגיטלית ענקית
+    </center>
+   </TD>
+   <TD>
+    <center>
+    היפר-קישורים/מעבר בין דפי האינטרנט
+    </center>
+   </TD>
+  </TR>
+  <TR>
+   <TD>
+    <center>
+    הפלטפורמות הינן מבוזרות, כמעט אנונימיות. כלומר, מתרחקים מהידיים הגדולות והמנחות של ענקיות הטכנולוגיה
+    אינטרנט אוטונומי, אינטליגנטי ופתוח יותר
+    ביזור נתונים ואינטרנט שקוף ומאובטח
+    </center>
+   </TD>
+   <TD>
+    <center>
+    ישנו הבדל בשולט בנתונים בשרת המרכזי. חברות החלו לאחסן את הנתונים הללו בשרתים שלהם, כדי להשתמש באלגוריתמים וליצור תוכן טוב יותר
+   חברות כגון גוגל, פייסבוק, טוויטר ועוד
+    </center>
+   </TD>
+   <TD>
+    <center>
+    דפי אינטרנט אישיים שהוכרבו בעיקר מדפים סטטיים בשרתי אינטרנט המופעלים על-ידי ספק שירותי אינטרנט או בשירותי אירוח אתרים בחינם
+    </center>
+   </TD>
+   <TD>
+    <center>
+    שרתי אחסון הנתונים
+    </center>
+   </TD>
+  </TR>
+  </TABLE>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+  </p>
+ </center>
+
+ <center>
+  <p>
+   <br/>
+   תרחיש שימוש אשר ממחיש את ההבדלים לעיל:
+   <br/>
+  </p>
+ </center>
+
+</section>
+<br/>
+
+<center>
 <section id="contact" class="section">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-contact me
-<br/>
-<br/>
-<br/>
-</section>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+ <h2>contact me</h2>
+ <div class="container2">
+  <form action="action_page.php">
+   <label for="fname">First Name:</label>
+   <input type="text" id="fname" name="firstname" placeholder="Your name..">
+   <br/>
+   <br/>
+   <label for="lname">Last Name:</label>
+   <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+   <br/>
+   <br/>
+   <label for="city">City:</label>
+   <select id="city" name="country">
+    <option value="Ashdod">Ashdod</option>
+    <option value="Beersheba">Beersheba</option>
+    <option value="Eilat">Eilat</option>
+    <option value="Hadera">Hadera</option>
+    <option value="Haifa">Haifa</option>
+    <option value="Herzliya">Herzliya</option>
+    <option value="Tel-Aviv">Tel-Aviv</option>
+    <option value="Jerusalem">Jerusalem</option>
+    <option value="Natanya">Natanya</option>
+    <option value="Zihron Yaakov">Zihron Yaakov</option>
 
+   </select>
+   <br/>
+   <br/>
+   <label for="subject">Subject:</label>
+   <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+   <br/>
+   <a href="mailto:noa85magrisso@gmail.com">Send</a>
+  </form>
+ </div>
+ </div>
+ <br/>
+ <br/>
+ <br/>
+</section>
+</center>
 
 <script type="text/javascript">
-$(function(){
+ $(function(){
   $("#nav a").click(function(e){
-    e.preventDefault();
-    $('html,body').scrollTo(this.hash,this.hash); 
+   e.preventDefault();
+   $('html,body').scrollTo(this.hash,this.hash);
   });
-});
+ });
 </script>
 <script type="text/javascript">
  $(document).scroll(function() {
-    $('#menu').toggle($(this).scrollTop()>1000)
- });​
- </script>
+  $('#menu').toggle($(this).scrollTop()>1000)
+ });
+</script>
+
+<right>
+ <h2 align="right">
+  תודות
+ </h2>
+ <h6 align="right">
+  ברצוני להודות לנכדתי, נועה, על שבנתה עבורי את האתר במסגרת הקורס "סביבות פיתוח באינטרנט"
+  בעודה סטודנטית להנדסת תוכנה ומערכות מידע באוניברסיטת בן-גוריון
+  <br/>
+  <br/>
+  <img src=with_me_2.jpeg width=460 height=260 />
+ </h6>
+</right>
 </body>
 </html>
