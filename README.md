@@ -1,6 +1,4 @@
-206934978
-Noa Magrisso
-https://web-development-environments-2022.github.io/206934978/
+206934978 | Noa Magrisso | https://web-development-environments-2022.github.io/206934978/
 
 # A Private Webstie To My Grandmother
 
