@@ -17,6 +17,7 @@ By this project I implemented a website for my grandma, as we asked to do for so
 
 
 ### 2. You can see my grandma's photos and her children with her/his husband/wife correspondigly (by hover over the photos you can see their name)
+### I added a hyperlink to the Heroism website for the SLA that my grandfather received in Operation Kadesh from the Commander-in-Chief of the Southern Command (above his picture as a fighter) 
 
 ![This is an image](https://github.com/Web-Development-Environments-2022/206934978/blob/main/myPhotos.jpg)
 
