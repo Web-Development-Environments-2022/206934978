@@ -8,7 +8,7 @@ By this project I implemented a website for my grandma, as we asked to do for so
 
 ## Which operators can u use?
 
-### 1. You can read about my gradma (if you want you can change the language to Hebrew as I the screenshot I added)
+### 1. You can read about my gradma (if you want you can change the language to Hebrew as the screenshot I added)
 
 ![This is an image](https://github.com/Web-Development-Environments-2022/206934978/blob/main/aboutme_english.jpg)
 
